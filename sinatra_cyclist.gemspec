@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Michael Lavrisha"]
   gem.email         = ["michael.lavrisha@gmail.com"]
   gem.description   = %q{Cycle through pages at a regular interval}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.summary       = %q{Sinatra can ride a bicycle over and over and over again}
+  gem.homepage      = "https://github.com/vrish88/sinatra_cyclist"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
