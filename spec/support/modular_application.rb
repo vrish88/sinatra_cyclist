@@ -1,11 +1,10 @@
-require "sinatra"
-require "debugger"
-require_relative "../../lib/sinatra/cyclist"
+require "sinatra/base"
+require "sinatra/cyclist"
 
 class MyApp < Sinatra::Base
   register Sinatra::Cyclist
 
-  set :views_to_cycle_through, [:page_1, :page_2]
+  set :routes_to_cycle_through, [:page_1, :page_2]
 
   get "/page_1" do
     "Page 1"
