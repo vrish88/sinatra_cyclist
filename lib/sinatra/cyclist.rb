@@ -10,8 +10,8 @@ module Sinatra
         page_index = session[:_cycle_page_index] || -1
         session[:_cycle_page_index] = page_index + 1
 
-        number_of_views = settings.views_to_cycle_through.length
-        page = settings.views_to_cycle_through[session[:_cycle_page_index] % number_of_views]
+        number_of_routes = settings.routes_to_cycle_through.length
+        page = settings.routes_to_cycle_through[session[:_cycle_page_index] % number_of_routes]
 
         session[:_cycle_duration] ||= params[:duration] || 3
 
