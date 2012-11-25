@@ -14,45 +14,55 @@ Or install it yourself as:
 
     $ gem install sinatra_cyclist
 
+Installation into your code depends on how you are using Sinatra
+
+### Classic Applications
+Require the gem and specify the routes you want to cycle through.
+
+```ruby
+require "sinatra"
+require "sinatra/cyclist"
+
+set :routes_to_cycle_through, [:page_1, :page_2]
+
+get "/page_1" do
+  "Page 1"
+end
+
+get "/page_2" do
+  "Page 2"
+end
+```
+
+### Modular Applications
+Require the gem, explicitly register the extension, and specify the routes.
+```ruby
+require "sinatra/base"
+require "sinatra/cyclist"
+
+class MyApp < Sinatra::Base
+  register Sinatra::Cyclist
+
+  set :routes_to_cycle_through, [:page_1, :page_2]
+
+  get "/page_1" do
+    "Page 1"
+  end
+
+  get "/page_2" do
+    "Page 2"
+  end
+end
+```
+
 ## Usage
+Now visit `/_cycle` to start cycling!
 
-* For classic applications, require the gem and specify the routes you want to cycle through.
-    ```ruby
-    require "sinatra"
-    require "sinatra/cyclist"
+You can also specify a duration (in seconds) in the params to the cycle action
 
-    set :routes_to_cycle_through, [:page_1, :page_2]
-
-    get "/page_1" do
-      "Page 1"
-    end
-
-    get "/page_2" do
-      "Page 2"
-    end
-    ```
-
-* For modular applications, require the gem, explicitly register the extension, and specify the routes.
-    ```ruby
-    require "sinatra/base"
-    require "sinatra/cyclist"
-
-    class MyApp < Sinatra::Base
-      register Sinatra::Cyclist
-
-      set :routes_to_cycle_through, [:page_1, :page_2]
-
-      get "/page_1" do
-        "Page 1"
-      end
-
-      get "/page_2" do
-        "Page 2"
-      end
-    end
-    ```
-
-Then visit the http://localhost:4567/_cycle to start cycling!
+```
+http://sinatra_app.com/_cycle?duration=10
+```
 
 ### Dashing
 If you are using [dashing](https://github.com/Shopify/dashing), update your `config.ru`
@@ -94,3 +104,5 @@ run Sinatra::Application
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+![](http://24.media.tumblr.com/tumblr_lhgo817Gnw1qf6o97o1_500.jpg)
