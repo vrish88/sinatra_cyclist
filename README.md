@@ -14,7 +14,40 @@ Or install it yourself as:
 
     $ gem install sinatra_cyclist
 
-Installation into your code depends on how you are using Sinatra
+Installation into your code depends on how you are using Sinatra.
+
+### Dashing
+If you are using [dashing](https://github.com/Shopify/dashing) update your `config.ru` to look something like:
+
+```ruby
+require "sinatra/cyclist"
+require 'dashing'
+
+configure do
+  set :auth_token, 'YOUR_AUTH_TOKEN'
+
+  helpers do
+    def protected!
+     # Put any authentication code you want in here.
+     # This method is run before accessing any resource.
+    end
+  end
+end
+
+map Sinatra::Application.assets_prefix do
+  run Sinatra::Application.sprockets
+end
+
+set :routes_to_cycle_through, [:dashboard_1, :dashboard_2]
+
+run Sinatra::Application
+```
+
+* Require `sinatra_cyclist` before `dashing` otherwise you will see this error:
+
+    > No such file or directory - sample/dashboards/_cycle.erb
+
+* Set the `routes_to_cycle_through` before running the application.
 
 ### Classic Applications
 Require the gem and specify the routes you want to cycle through.
@@ -63,39 +96,6 @@ You can also specify a duration (in seconds) in the params to the cycle action
 ```
 http://sinatra_app.com/_cycle?duration=10
 ```
-
-### Dashing
-If you are using [dashing](https://github.com/Shopify/dashing), update your `config.ru`
-
-```ruby
-require "sinatra/cyclist"
-require 'dashing'
-
-configure do
-  set :auth_token, 'YOUR_AUTH_TOKEN'
-
-  helpers do
-    def protected!
-     # Put any authentication code you want in here.
-     # This method is run before accessing any resource.
-    end
-  end
-end
-
-map Sinatra::Application.assets_prefix do
-  run Sinatra::Application.sprockets
-end
-
-set :routes_to_cycle_through, [:dashboard_1, :dashboard_2]
-
-run Sinatra::Application
-```
-
-* Require `sinatra_cyclist` before `dashing` otherwise you will see this error:
-
-    > No such file or directory - sample/dashboards/_cycle.erb
-
-* Set the `routes_to_cycle_through` before running the application.
 
 ## Contributing
 
