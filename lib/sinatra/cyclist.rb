@@ -16,7 +16,7 @@ module Sinatra
         number_of_routes = settings.routes_to_cycle_through.length
         page = settings.routes_to_cycle_through[session[:_cycle_page_index] % number_of_routes]
 
-        session[:_cycle_duration] ||= params[:duration] || 3
+        session[:_cycle_duration] = params[:duration] || 3
 
         session[:_cycle] = true
 
