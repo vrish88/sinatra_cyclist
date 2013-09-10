@@ -6,6 +6,7 @@ module Sinatra
     def self.registered(app)
       app.enable :sessions
       app.set :routes_to_cycle_through, []
+      app.set :cycle_duration, 3
 
       app.get "/_cycle" do
         return if settings.routes_to_cycle_through.empty?
@@ -16,7 +17,11 @@ module Sinatra
         number_of_routes = settings.routes_to_cycle_through.length
         page = settings.routes_to_cycle_through[session[:_cycle_page_index] % number_of_routes]
 
-        session[:_cycle_duration] = params[:duration] || 3
+        if params[:duration]
+          session[:_cycle_duration] = params[:duration]
+        end
+
+        session[:_cycle_duration] ||= settings.cycle_duration
 
         session[:_cycle] = true
 
