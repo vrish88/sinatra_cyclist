@@ -97,6 +97,12 @@ You can also specify a duration (in seconds) in the params to the cycle action
 http://sinatra_app.com/_cycle?duration=10
 ```
 
+You can also specify a playlist in the params to load a list of pages
+
+```
+http://sinatra_app.com/_cycle?duration=10&playlist=page1,page2,page3
+```
+
 ## Contributing
 
 1. Fork it

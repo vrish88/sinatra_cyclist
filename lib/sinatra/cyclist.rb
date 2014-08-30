@@ -5,9 +5,13 @@ module Sinatra
   module Cyclist
     def self.registered(app)
       app.enable :sessions
-      app.set :routes_to_cycle_through, []
 
       app.get "/_cycle" do
+
+        if params[:playlist]
+          app.set :routes_to_cycle_through, params[:playlist].split(',')
+        end
+
         return if settings.routes_to_cycle_through.empty?
 
         page_index = session[:_cycle_page_index] || -1
