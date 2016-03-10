@@ -23,9 +23,12 @@ module Sinatra
 
         session[:_cycle_duration] ||= settings.cycle_duration
 
+        session[:_cycle_redirect_params] ||= params.reject { |p| p == :duration }
+        query = session[:_cycle_redirect_params].map { |k,v| "#{k}=#{v}" }.join('&')
+
         session[:_cycle] = true
 
-        redirect "/#{page}"
+        redirect "/#{page}#{query.empty? ? '' : "?#{query}"}"
       end
 
       app.before do
