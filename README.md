@@ -97,6 +97,12 @@ You can also specify a duration (in seconds) in the params to the cycle action
 http://sinatra_app.com/_cycle?duration=10
 ```
 
+And you can set the default duration in the configuration
+
+```
+set :cycle_duration, 60
+```
+
 ## Contributing
 
 1. Fork it
